@@ -1,4 +1,4 @@
-const { ObjectID } = require("mongodb");
+import { ObjectID } from "mongodb";
 import express from "express";
 import cors from "cors";
 import mongoose from "./db/mongoose";
@@ -6,7 +6,6 @@ import bodyParser from "body-parser";
 
 import Department from "./models/department";
 import Employee from "./models/employee";
-import department from "./models/department";
 
 const app = express();
 const router = express.Router();
@@ -95,7 +94,7 @@ router.route("/departments/:id").patch((req, res) => {
   Department.findByIdAndUpdate(id, { $set: req.body }, { new: true }).then(
     department => {
       if (!department) {
-        res.status(404).send(department);
+        return res.status(404).send(department);
       }
 
       res.json(department);
@@ -104,6 +103,116 @@ router.route("/departments/:id").patch((req, res) => {
       res.status(400).send(err);
     }
   );
+});
+
+router.route("/employees").get((req, res) => {
+  Employee.find().then(
+    employees => {
+      res.json(employees);
+    },
+    err => {
+      res.status(400).send(err);
+    }
+  );
+});
+
+router.route("/employees/:id").get((req, res) => {
+  let id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  Employee.findById(id).then(
+    employee => {
+      if (!employee) {
+        return res.status(404).send(employee);
+      }
+
+      res.json(employee);
+    },
+    err => {
+      res.status(400).send(err);
+    }
+  );
+});
+
+router.route("/employees").post((req, res) => {
+  let employee = new Employee(req.body);
+
+  employee.save().then(
+    doc => {
+      res.json(doc);
+    },
+    err => {
+      res.status(400).send(err);
+    }
+  );
+});
+
+router.route("/employees/:id").delete((req, res) => {
+  let id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  Employee.findByIdAndDelete(id).then(
+    employee => {
+      if (!employee) {
+        return res.status(404).send(employee);
+      }
+
+      res.json(employee);
+    },
+    err => {
+      res.status(400).send(err);
+    }
+  );
+});
+
+router.route("/employees/:id").patch((req, res) => {
+  let id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+  }
+
+  Employee.findByIdAndUpdate(id, { $set: req.body }, { new: true }).then(
+    employee => {
+      if (!employee) {
+        res.status(404).send(employee);
+      }
+
+      res.json(employee);
+    },
+    err => {
+      res.status(400).send(err);
+    }
+  );
+});
+
+router.route("/employeesByDept/:id").get((req, res) => {
+  let id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  Employee.find({ department: id })
+    //.populate("department", "deptName")
+    .then(
+      employee => {
+        if (!employee) {
+          res.status(404).send(employee);
+        }
+
+        res.json(employee);
+      },
+      err => {
+        res.status(400).send(err);
+      }
+    );
 });
 
 app.use("/api", router);

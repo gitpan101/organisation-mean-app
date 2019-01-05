@@ -13,4 +13,4 @@ let Department = new mongoose.Schema({
   }
 });
 
-export default mongoose.model("Depaerment", Department);
+export default mongoose.model("Department", Department);
