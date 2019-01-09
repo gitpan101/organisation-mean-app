@@ -3,10 +3,12 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { ListComponent } from "./departments/list.component";
 import { DetailsComponent } from "./departments/details.component";
+import { EditComponent } from "./departments/edit.component";
 
 const routes: Routes = [
   { path: "department/list", component: ListComponent },
-  { path: "department/details/:id", component: DetailsComponent }
+  { path: "department/details/:id", component: DetailsComponent },
+  { path: "department/edit/:id", component: EditComponent }
 ];
 
 @NgModule({

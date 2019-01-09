@@ -3,7 +3,6 @@ import { ActivatedRoute } from "@angular/router";
 
 import { MatTableDataSource } from "@angular/material";
 
-import { IDepartment } from "../models/department.model";
 import { IEmployee } from "../models/employee.model";
 import { AppService } from "../app-service.service";
 

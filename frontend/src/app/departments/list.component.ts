@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
+import { MatTableDataSource } from "@angular/material";
+
 import { IDepartment } from "../models/department.model";
 import { AppService } from "../app-service.service";
 
@@ -10,7 +12,7 @@ import { AppService } from "../app-service.service";
   styleUrls: ["./list.component.scss"]
 })
 export class ListComponent implements OnInit {
-  deptList: IDepartment[];
+  deptList: MatTableDataSource<IDepartment>;
   displayedColumns: String[] = ["deptName", "streamType", "hodName", "actions"];
 
   constructor(private _appService: AppService, private _router: Router) {}
@@ -22,7 +24,7 @@ export class ListComponent implements OnInit {
   fetchDepartments(): void {
     this._appService.getDepartments().subscribe(
       (depts: IDepartment[]) => {
-        this.deptList = depts;
+        this.deptList = new MatTableDataSource<IDepartment>(depts);
       },
       err => console.log(err)
     );

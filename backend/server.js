@@ -36,7 +36,7 @@ router.route("/departments/:id").get((req, res) => {
     return res.status(404).send();
   }
 
-  Department.findById().then(
+  Department.findById(id).then(
     department => {
       if (!department) {
         return res.status(404).send(department);
@@ -200,7 +200,7 @@ router.route("/employeesByDept/:id").get((req, res) => {
   }
 
   Employee.find({ department: id })
-    .populate("department") //, "deptName")
+    .populate("department", "deptName")
     .then(
       employee => {
         if (!employee) {

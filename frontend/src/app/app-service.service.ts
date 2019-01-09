@@ -17,7 +17,21 @@ export class AppService {
     return this._http.get<IDepartment[]>(`${this._uri}/departments`);
   }
 
-  getEmployeesByDept(id): Observable<IEmployee[]> {
+  getDepartmentById(id: String): Observable<IDepartment> {
+    return this._http.get<IDepartment>(`${this._uri}/departments/${id}`);
+  }
+
+  getEmployeesByDept(id: String): Observable<IEmployee[]> {
     return this._http.get<IEmployee[]>(`${this._uri}/employeesByDept/${id}`);
+  }
+
+  updateDepartmentInfo(
+    id: String,
+    update: IDepartment
+  ): Observable<IDepartment> {
+    return this._http.patch<IDepartment>(
+      `${this._uri}/departments/${id}`,
+      update
+    );
   }
 }

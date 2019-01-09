@@ -5,34 +5,34 @@
     </mat-card-title>
 
     <mat-card-content>
-      <table mat-table [dataSource]="deptList">
+      <mat-table [dataSource]="deptList">
         <ng-container matColumnDef="deptName">
-          <th mat-header-cell *matHeaderCellDef>Department</th>
-          <td mat-cell *matCellDef="let element">{{element.deptName}}</td>
+          <mat-header-cell *matHeaderCellDef>Department</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.deptName}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="streamType">
-          <th mat-header-cell *matHeaderCellDef>Stream / Branch</th>
-          <td mat-cell *matCellDef="let element">{{element.streamType}}</td>
+          <mat-header-cell *matHeaderCellDef>Stream / Branch</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.streamType}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="hodName">
-          <th mat-header-cell *matHeaderCellDef>H.O.D.</th>
-          <td mat-cell *matCellDef="let element">{{element.hodName}}</td>
+          <mat-header-cell *matHeaderCellDef>H.O.D.</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.hodName}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef class="mat-column-right">Actions</th>
-          <td mat-cell *matCellDef="let element" class="mat-column-right">
+          <mat-header-cell *matHeaderCellDef class="mat-column-right">Actions</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="mat-column-right">
             <button mat-button color="primary" (click)="getDetails(element._id)">Details</button>
-            <button mat-button color="primary">Edit</button>
+            <button mat-button color="primary" (click)="editDepartment(element._id)">Edit</button>
             <button mat-button color="primary">Delete</button>
-          </td>
+          </mat-cell>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
     </mat-card-content>
   </mat-card>
 </div>
