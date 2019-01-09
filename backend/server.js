@@ -200,7 +200,7 @@ router.route("/employeesByDept/:id").get((req, res) => {
   }
 
   Employee.find({ department: id })
-    //.populate("department", "deptName")
+    .populate("department") //, "deptName")
     .then(
       employee => {
         if (!employee) {

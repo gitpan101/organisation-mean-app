@@ -1,3 +1,37 @@
-<p>
-  details works!
-</p>
+<div>
+  <mat-card>
+    <mat-card-title>
+      Employees in {{department}}
+    </mat-card-title>
+    <mat-card-content>
+      <mat-table [dataSource]="empDataSource">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="contactNum">
+          <mat-header-cell *matHeaderCellDef>Contact</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.contactNum}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="salary">
+          <mat-header-cell *matHeaderCellDef>Salary</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.salary}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </mat-card-content>
+    <mat-card-footer>
+      <button mat-raised-button color="accent" [routerLink]="['/department/list']">Back</button>
+    </mat-card-footer>
+
+  </mat-card>
+</div>
