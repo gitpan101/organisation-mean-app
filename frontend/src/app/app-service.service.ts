@@ -42,4 +42,8 @@ export class AppService {
   deleteDepartment(id: String): Observable<IDepartment> {
     return this._http.delete<IDepartment>(`${this._uri}/departments/${id}`);
   }
+
+  getEmployees(): Observable<IEmployee[]> {
+    return this._http.get<IEmployee[]>(`${this._uri}/employees`);
+  }
 }

@@ -8,12 +8,20 @@ import { AppComponent } from "./app.component";
 
 import { AppMaterialsModule } from "./app-materials/app-materials.module";
 import { ListComponent } from "./departments/list.component";
-import { DetailsComponent } from './departments/details.component';
-import { EditComponent } from './departments/edit.component';
-import { CreateComponent } from './departments/create.component';
+import { DetailsComponent } from "./departments/details.component";
+import { EditComponent } from "./departments/edit.component";
+import { CreateComponent } from "./departments/create.component";
+import { ListComponent as empList } from "./employees/list.component";
 
 @NgModule({
-  declarations: [AppComponent, ListComponent, DetailsComponent, EditComponent, CreateComponent],
+  declarations: [
+    AppComponent,
+    ListComponent,
+    DetailsComponent,
+    EditComponent,
+    CreateComponent,
+    empList
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

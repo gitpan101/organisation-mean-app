@@ -106,14 +106,16 @@ router.route("/departments/:id").patch((req, res) => {
 });
 
 router.route("/employees").get((req, res) => {
-  Employee.find().then(
-    employees => {
-      res.json(employees);
-    },
-    err => {
-      res.status(400).send(err);
-    }
-  );
+  Employee.find()
+    .populate("department", "deptName")
+    .then(
+      employees => {
+        res.json(employees);
+      },
+      err => {
+        res.status(400).send(err);
+      }
+    );
 });
 
 router.route("/employees/:id").get((req, res) => {
