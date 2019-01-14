@@ -10,9 +10,10 @@ import { AppMaterialsModule } from "./app-materials/app-materials.module";
 import { ListComponent } from "./departments/list.component";
 import { DetailsComponent } from './departments/details.component';
 import { EditComponent } from './departments/edit.component';
+import { CreateComponent } from './departments/create.component';
 
 @NgModule({
-  declarations: [AppComponent, ListComponent, DetailsComponent, EditComponent],
+  declarations: [AppComponent, ListComponent, DetailsComponent, EditComponent, CreateComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

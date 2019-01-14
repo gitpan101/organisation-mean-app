@@ -8,7 +8,7 @@ import { AppService } from "../app-service.service";
 import { IDepartment } from "../models/department.model";
 
 @Component({
-  selector: "app-edit",
+  selector: "dept-edit",
   templateUrl: "./edit.component.html",
   styleUrls: ["./edit.component.scss"]
 })
@@ -49,7 +49,7 @@ export class EditComponent implements OnInit {
       .updateDepartmentInfo(this.deptId, department)
       .subscribe(res => {
         if (!res) {
-          this._snackBar.open("Unable to update!", "OK", {
+          return this._snackBar.open("Unable to update!", "OK", {
             duration: 3000
           });
         }

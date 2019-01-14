@@ -13,6 +13,10 @@ export class AppService {
 
   constructor(private _http: HttpClient) {}
 
+  createDepartment(department): Observable<IDepartment> {
+    return this._http.post<IDepartment>(`${this._uri}/departments`, department);
+  }
+
   getDepartments(): Observable<IDepartment[]> {
     return this._http.get<IDepartment[]>(`${this._uri}/departments`);
   }
@@ -33,5 +37,9 @@ export class AppService {
       `${this._uri}/departments/${id}`,
       update
     );
+  }
+
+  deleteDepartment(id: String): Observable<IDepartment> {
+    return this._http.delete<IDepartment>(`${this._uri}/departments/${id}`);
   }
 }

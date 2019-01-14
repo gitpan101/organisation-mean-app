@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { MatTableDataSource } from "@angular/material";
+import { MatTableDataSource, MatSnackBar } from "@angular/material";
 
 import { IDepartment } from "../models/department.model";
 import { AppService } from "../app-service.service";
 
 @Component({
-  selector: "app-list",
+  selector: "dept-list",
   templateUrl: "./list.component.html",
   styleUrls: ["./list.component.scss"]
 })
@@ -15,7 +15,11 @@ export class ListComponent implements OnInit {
   deptList: MatTableDataSource<IDepartment>;
   displayedColumns: String[] = ["deptName", "streamType", "hodName", "actions"];
 
-  constructor(private _appService: AppService, private _router: Router) {}
+  constructor(
+    private _appService: AppService,
+    private _router: Router,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.fetchDepartments();
@@ -38,5 +42,22 @@ export class ListComponent implements OnInit {
     this._router.navigate([`/department/edit/${id}`]);
   }
 
-  deleteDepartment(id): void {}
+  deleteDepartment(id): void {
+    this._appService.deleteDepartment(id).subscribe(
+      response => {
+        if (!response) {
+          return this._snackBar.open("Unable to delete department!", "OK", {
+            duration: 3000
+          });
+        }
+
+        this.fetchDepartments();
+
+        this._snackBar.open("Department deleted successfully.", "OK", {
+          duration: 3000
+        });
+      },
+      err => console.log(err)
+    );
+  }
 }
