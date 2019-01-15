@@ -1,3 +1,5 @@
+import "./config/config";
+
 import path from "path";
 import { ObjectID } from "mongodb";
 import express from "express";
@@ -8,18 +10,19 @@ import bodyParser from "body-parser";
 import Department from "./models/department";
 import Employee from "./models/employee";
 
+const port = process.env.PORT;
 const distPath = path.join(__dirname, "../dist");
 
 const app = express();
 const router = express.Router();
 
 var corsOptions = {
-  origin: "http://localhost:4200",
+  origin: process.env.ROOT_URL || "http://localhost:3000",
   optionsSuccessStatus: 200
 };
 
 app.use(express.static(distPath));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 router.route("/departments").get((req, res) => {
@@ -228,4 +231,4 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
-app.listen(3000, () => console.log("Server up on port 3000"));
+app.listen(port, () => console.log(`Server up on port ${port}`));

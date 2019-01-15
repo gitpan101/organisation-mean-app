@@ -11,6 +11,9 @@
     "dev": "babel-watch server/server.js",
     "postinstall": "ng build --output-path dist"
   },
+  "engines": {
+    "node": "11.2.0"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~7.1.0",
