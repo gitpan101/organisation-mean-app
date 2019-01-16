@@ -1,0 +1,32 @@
+.toolbar__title {
+  border-right: 1px solid black;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.toolbar__title:focus {
+  outline: 0;
+}
+
+.toolbar__link {
+  margin-left: 10px;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .toolbar__link {
+    width: 8%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .toolbar__link {
+    width: 11%;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+  .toolbar__link {
+    width: 15%;
+  }
+}

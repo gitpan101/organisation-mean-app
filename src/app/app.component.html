@@ -1,9 +1,22 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
   <mat-toolbar>
-    <span>
+    <span class="toolbar__title" [routerLink]="['']">
       {{ title }}
     </span>
+
+    <div class="toolbar__link">
+      <button mat-icon-button [routerLink]="['/department/list']">
+        <mat-icon>domain</mat-icon> Departments
+      </button>
+    </div>
+
+    <div class="toolbar__link">
+      <button mat-icon-button [routerLink]="['/employee/list']">
+        <mat-icon>people</mat-icon> Employees
+      </button>
+    </div>
+
   </mat-toolbar>
 </div>
 

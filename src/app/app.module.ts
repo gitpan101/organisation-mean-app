@@ -12,6 +12,7 @@ import { DetailsComponent } from "./departments/details.component";
 import { EditComponent } from "./departments/edit.component";
 import { CreateComponent } from "./departments/create.component";
 import { ListComponent as empList } from "./employees/list.component";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ListComponent as empList } from "./employees/list.component";
     DetailsComponent,
     EditComponent,
     CreateComponent,
-    empList
+    empList,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
