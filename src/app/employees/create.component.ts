@@ -42,18 +42,29 @@ export class CreateComponent implements OnInit {
   }
 
   createEmployee(empData: IEmployee): void {
-    this._appService.createEmployee(empData).subscribe(employee => {
-      if (!employee) {
-        return this._snackBar.open("Unable to create Employee!", "OK", {
+    this._appService.createEmployee(empData).subscribe(
+      employee => {
+        if (!employee) {
+          return this._snackBar.open("Unable to create Employee!", "OK", {
+            duration: 3000
+          });
+        }
+
+        this._snackBar.open("Employee created successfully.", "OK", {
           duration: 3000
         });
+
+        this._router.navigate(["/employee/list"]);
+      },
+      err => {
+        this._snackBar.open(
+          "Please provide valid email and phone number with country code.",
+          "OK",
+          {
+            duration: 5000
+          }
+        );
       }
-
-      this._snackBar.open("Employee created successfully.", "OK", {
-        duration: 3000
-      });
-
-      this._router.navigate(["/employee/list"]);
-    });
+    );
   }
 }

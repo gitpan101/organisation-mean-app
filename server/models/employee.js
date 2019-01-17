@@ -27,8 +27,8 @@ let Employee = new mongoose.Schema({
 
         return validator.isMobilePhone(
           value,
-          // Indian MobilePhonelocale System
-          "en-IN",
+          // Indian MobilePhonelocale System, "en-IN"
+          "any",
           {
             // used to not validate if country code is not used, e.g. +911234567890
             strictMode: true
