@@ -11,8 +11,9 @@ import { ListComponent } from "./departments/list.component";
 import { DetailsComponent } from "./departments/details.component";
 import { EditComponent } from "./departments/edit.component";
 import { CreateComponent } from "./departments/create.component";
+import { CreateComponent as empCreate } from "./employees/create.component";
 import { ListComponent as empList } from "./employees/list.component";
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from "./dashboard/dashboard.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DetailsComponent,
     EditComponent,
     CreateComponent,
+    empCreate,
     empList,
     DashboardComponent
   ],

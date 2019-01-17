@@ -13,14 +13,29 @@ let Employee = new mongoose.Schema({
     unique: true,
     validate: {
       validator: validator.isEmail,
-      message: "{Value} is not valid"
+      message: "{VALUE} is not valid"
     }
   },
   contactNum: {
     type: String,
+    required: false,
     validate: {
-      validator: validator.isMobilePhone,
-      message: "{Value} is not valid"
+      validator: value => {
+        if (value === "") {
+          return true;
+        }
+
+        return validator.isMobilePhone(
+          value,
+          // Indian MobilePhonelocale System
+          "en-IN",
+          {
+            // used to not validate if country code is not used, e.g. +911234567890
+            strictMode: true
+          }
+        );
+      },
+      message: "{VALUE} is not valid"
     }
   },
   salary: {

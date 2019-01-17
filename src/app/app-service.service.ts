@@ -13,7 +13,7 @@ export class AppService {
 
   constructor(private _http: HttpClient) {}
 
-  createDepartment(department): Observable<IDepartment> {
+  createDepartment(department: IDepartment): Observable<IDepartment> {
     return this._http.post<IDepartment>(`${this._uri}/departments`, department);
   }
 
@@ -43,7 +43,15 @@ export class AppService {
     return this._http.delete<IDepartment>(`${this._uri}/departments/${id}`);
   }
 
+  createEmployee(employee: IEmployee): Observable<IEmployee> {
+    return this._http.post<IEmployee>(`${this._uri}/employees`, employee);
+  }
+
   getEmployees(): Observable<IEmployee[]> {
     return this._http.get<IEmployee[]>(`${this._uri}/employees`);
+  }
+
+  deleteEmployee(id: String): Observable<IEmployee> {
+    return this._http.delete<IEmployee>(`${this._uri}/employees/${id}`);
   }
 }

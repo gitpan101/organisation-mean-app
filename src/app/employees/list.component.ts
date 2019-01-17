@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { MatTableDataSource } from "@angular/material";
+import { MatTableDataSource, MatSnackBar } from "@angular/material";
 
 import { AppService } from "../app-service.service";
 import { IEmployee } from "../models/employee.model";
@@ -18,10 +18,15 @@ export class ListComponent implements OnInit {
     "email",
     "contactNum",
     "salary",
-    "department"
+    "department",
+    "actions"
   ];
 
-  constructor(private _appService: AppService, private _router: Router) {}
+  constructor(
+    private _appService: AppService,
+    private _router: Router,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.fetchEmployees();
@@ -31,12 +36,30 @@ export class ListComponent implements OnInit {
     this._appService.getEmployees().subscribe(
       (employees: IEmployee[]) => {
         if (!employees) {
-          return console.log("Unable to get employees!");
+          return this._snackBar.open("Unable to get Employee List!", "OK", {
+            duration: 3000
+          });
         }
 
         this.empList = new MatTableDataSource<IEmployee>(employees);
       },
       err => console.log(err)
     );
+  }
+
+  deleteEmployee(id: String): void {
+    this._appService.deleteEmployee(id).subscribe(employee => {
+      if (!employee) {
+        return this._snackBar.open("Unable to delete Employee!", "OK", {
+          duration: 3000
+        });
+      }
+
+      this._snackBar.open("Employee deleted successfully.", "OK", {
+        duration: 3000
+      });
+
+      this.fetchEmployees();
+    });
   }
 }
